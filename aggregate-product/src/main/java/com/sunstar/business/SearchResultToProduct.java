@@ -14,7 +14,7 @@ public class SearchResultToProduct {
 
 
     public static long importData( ){
-        String url = "jdbc:mysql://192.168.0.182:3306/couponsdb?user=root&password=Sunstar123!";
+        String url = "jdbc:mysql://192.168.0.183:3306/couponsdb?user=root&password=Sunstar123!&useUnicode=true&characterEncoding=UTF-8";
         String sql = "SELECT a.classid,a.spname,a.sppic,0,0,1,b.value_id,a.id FROM ss_hj_search_result a LEFT JOIN ss_hj_value b ON (a.brand_name = b.value_name AND b.quantity_id = 1) WHERE a.id not in (select autoid from ss_hj_product_relation)";
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -53,12 +53,11 @@ public class SearchResultToProduct {
             rs = psHJSearchResult.executeQuery();
             while (rs.next()) {
                 //此处处理业务逻辑
-                count++;
-                if(count%100000!=0){
+
                     if(rs.getInt("value_id")==0){
-                        logger.error("valueId品牌为空,不导入,autoid:"+rs.getInt("id"));
+                        logger.error("valueId品牌为空,autoid:"+rs.getInt("id"));
                         count_no_valueId++;
-                        continue;//品牌为空不导入
+                        //continue;//品牌为空不导入
                     }
                     //聚合商品
                     psHJProduct.setInt(1,productId);
@@ -92,7 +91,8 @@ public class SearchResultToProduct {
                     productId++;
                     pictureId++;
                     relationId++;
-                }else {//2000一次提交
+                count++;
+                if(count%100000==0) {//提交
                     psHJProduct.executeBatch();
                     psHJProductPicture.executeBatch();
                     psHJProductRelation.executeBatch();
