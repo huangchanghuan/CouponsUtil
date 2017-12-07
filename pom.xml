@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sunstar</groupId>
+  <artifactId>CouponUtils</artifactId>
+  <version>0.0.1</version>
+
+  <packaging>pom</packaging>
+  
+  <properties>
+    <!-- 文件拷贝时的编码 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- 不执行测试用例，也不编译测试用例类 -->
+    <maven.test.skip>true</maven.test.skip>
+    <!-- JDK版本 -->
+    <jdk.version>1.8</jdk.version>
+    <!-- 项目编码格式 -->
+    <project.encoding>UTF-8</project.encoding>
+    <!-- 通用jar包版本 -->
+    <junit.version>4.12</junit.version>
+    <mysql.version>5.1.44</mysql.version>
+    <log4j.version>1.2.17</log4j.version>
+    <servlet.api.version>4.0.0</servlet.api.version>
+    <org.json.version>20170516</org.json.version>
+  </properties>
+  
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- 资源配置插件 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <!-- <version>3.0.2</version> -->
+          <configuration>
+            <encoding>${project.encoding}</encoding>
+          </configuration>
+        </plugin>
+        <!-- 编译插件 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <!-- <version>3.6.2</version> -->
+          <configuration>
+            <compilerVersion>${jdk.version}</compilerVersion>
+            <source>${jdk.version}</source> <!-- 源代码使用的开发版本 -->
+            <target>${jdk.version}</target> <!-- 需要生成的目标class文件的编译版本 -->
+            <encoding>${project.encoding}</encoding>
+            <fork>true</fork>
+          </configuration>
+        </plugin>
+        <!-- jar包插件 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <!-- <version>3.0.2</version> -->
+          <configuration>
+            <archive>
+              <index>true</index>
+            </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <configuration>
+            <updateReleaseInfo>true</updateReleaseInfo>
+            <createChecksum>true</createChecksum>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- 单元测试 -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- mysql驱动器 -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+      <!-- 日志包 -->
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <!-- servlet -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servlet.api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- json数据 -->
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>${org.json.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <modules>
+  	<module>aggregate-product</module>
+  	<module>aggregate-product-file</module>
+  </modules>
+</project>
