@@ -9,6 +9,12 @@
   <artifactId>aggregate-product</artifactId>
   
   <dependencies>
+      <dependency>
+          <groupId>com.sunstar</groupId>
+          <artifactId>aggregate-product-file</artifactId>
+          <version>0.0.1</version>
+      </dependency>
+
   	<dependency>
        <groupId>mysql</groupId>
        <artifactId>mysql-connector-java</artifactId>
@@ -26,5 +32,10 @@
       <artifactId>jsoup</artifactId>
       <version>1.10.3</version>
     </dependency>
+      <dependency>
+          <groupId>org.elasticsearch</groupId>
+          <artifactId>elasticsearch</artifactId>
+          <version>2.4.4</version>
+      </dependency>
   </dependencies>
 </project>
